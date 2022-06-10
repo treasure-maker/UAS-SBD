@@ -1,0 +1,93 @@
+
+Setting environment for using XAMPP for Windows.
+LENOVO@CHERYLCANTIK c:\xampp
+# mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 132
+Server version: 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'show databases' at line 2
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bookr              |
+| information_schema |
+| lab_pwl            |
+| migrations         |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [(none)]> use migrations;
+Database changed
+MariaDB [migrations]> SELECT
+    -> a.id, a.task_name, b.task_status, b.task_comments, d.category_name as 'Category',
+    -> DATEDIFF(a.task_duration_end, a.task_duration_start) as 'Lama Pengerjaan',
+    -> c.name as 'Create By', (SELECT name from users where users.id = task_dailies.user_verify_id ) as 'Verified By'
+    -> FROM task_plans a
+    -> RIGHT JOIN task_dailies b ON a.id = b.plan_id
+    -> INNER JOIN users c ON b.id = c.id
+    -> RIGHT JOIN task_categories d ON a.category_id = d.id
+    ->
+    ->
+    ->
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'show databases' at line 12
+MariaDB [migrations]> select * from task_plans
+    -> ;
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+| id                                   | task_name                               | ask_duration_start | task_duration_end | user_create                          | category_id                          | indicators_id                        | task_priority | task_status | created_at | updated_at |
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+| 924eaa0e-c8f1-4132-a032-1d98c176a8c3 | Membuat Modul add_to_cart pada Aplikasi | 2022-06-10         | 2022-06-30        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 5e72be09-384e-4097-8e78-c20e84d88112 |             1 | Pending     | NULL       | NULL       |
+| c96fdbd6-a3a4-42e3-b437-444ffd734a36 | Menganalisa Data Kemahasiswaan          | 2022-06-10         | 2022-06-17        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | e46f9318-ca1a-4a3d-a998-913c8fdf5917 | 669c981f-1bd6-47d5-b2ce-de568aaa160a |             2 | Process     | NULL       | NULL       |
+| f1ee037b-9135-41d2-9757-091391df4fb8 | Mendokumentasikan Code                  | 2022-06-10         | 2022-06-10        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 229d48a0-a643-42c2-832f-882297db9003 | 5e72be09-384e-4097-8e78-c20e84d88112 |             3 | Process     | NULL       | NULL       |
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+3 rows in set (0.000 sec)
+
+MariaDB [migrations]> select * from task_categories;
++--------------------------------------+---------------+--------------------------------------------+------------+------------+
+| id                                   | category_name | description                                | created_at | updated_at |
++--------------------------------------+---------------+--------------------------------------------+------------+------------+
+| 229d48a0-a643-42c2-832f-882297db9003 | Analisis      | Tugas Analisis                             | NULL       | NULL       |
+| 72233152-7af0-4e89-94fc-d8d02e73aba8 | Administrasi  | Tugas yang berhubungan dengan administrasi | NULL       | NULL       |
+| e46f9318-ca1a-4a3d-a998-913c8fdf5917 | Teknikal      | Tugas Teknikal                             | NULL       | NULL       |
++--------------------------------------+---------------+--------------------------------------------+------------+------------+
+3 rows in set (0.000 sec)
+
+MariaDB [migrations]> select * from task_indicators;
++--------------------------------------+----------------+--------------+------+------------+------------+
+| id                                   | indicator_name | output_value | year | created_at | updated_at |
++--------------------------------------+----------------+--------------+------+------------+------------+
+| 5e72be09-384e-4097-8e78-c20e84d88112 | Indikator 2    |          100 | 2022 | NULL       | NULL       |
+| 669c981f-1bd6-47d5-b2ce-de568aaa160a | Indikator 1    |          100 | 2022 | NULL       | NULL       |
++--------------------------------------+----------------+--------------+------+------------+------------+
+2 rows in set (0.000 sec)
+
+MariaDB [migrations]> select * from task_plans;
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+| id                                   | task_name                               | ask_duration_start | task_duration_end | user_create                          | category_id                          | indicators_id                        | task_priority | task_status | created_at | updated_at |
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+| 924eaa0e-c8f1-4132-a032-1d98c176a8c3 | Membuat Modul add_to_cart pada Aplikasi | 2022-06-10         | 2022-06-30        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 5e72be09-384e-4097-8e78-c20e84d88112 |             1 | Pending     | NULL       | NULL       |
+| c96fdbd6-a3a4-42e3-b437-444ffd734a36 | Menganalisa Data Kemahasiswaan          | 2022-06-10         | 2022-06-17        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | e46f9318-ca1a-4a3d-a998-913c8fdf5917 | 669c981f-1bd6-47d5-b2ce-de568aaa160a |             2 | Process     | NULL       | NULL       |
+| f1ee037b-9135-41d2-9757-091391df4fb8 | Mendokumentasikan Code                  | 2022-06-10         | 2022-06-10        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 229d48a0-a643-42c2-832f-882297db9003 | 5e72be09-384e-4097-8e78-c20e84d88112 |             3 | Process     | NULL       | NULL       |
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+3 rows in set (0.000 sec)
+
+MariaDB [migrations]> create VIEW 211402044 AS
+    -> SELECT task_plans.id, task_plans.task_name, task_plans.task_status, task_plans.indicators_id, task_categories.category_name, task_indicators.indicator_name FROM task_plans, task_categories, task_indicators
+    -> INNER JOIN task_categories ON task_plans.id=task_categories.id
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '211402044 AS
+SELECT task_plans.id, task_plans.task_name, task_plans.task_stat...' at line 1
+MariaDB [migrations]>
